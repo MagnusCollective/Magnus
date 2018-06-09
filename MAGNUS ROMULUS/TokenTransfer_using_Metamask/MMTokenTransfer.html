@@ -1,0 +1,136 @@
+/*This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+ /*This is developed by Magnus Collective. This program is used to 
+ transfer ERC20 Tokens from one account to another. 
+ */
+ 
+ 
+<html>
+<head>
+
+
+  <script type="text/javascript" src="./human_standard_token_abi.js"></script>
+  <script type="text/javascript" src="./bignumber1.js"></script>
+  <script type="text/javascript">
+	//
+	var version = web3.version.api;
+	var account;
+	//account2 = address you want to transfer tokens to.
+	var account2 = "0Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+    //Standard ERC20 token ABI.
+	tokenAbi = human_standard_token_abi
+	//To check if web3 is connected.
+	if(web3.isConnected()) {    
+		var con = "Connected";
+			}
+	else{
+	var con = "Not Connected";
+	}
+	//To find the current provider.
+	if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } 
+	//Event listener to monitor for changes in the current window.
+	window.addEventListener("load", function() {
+		account = web3.eth.accounts[0];
+        var accountInterval = setInterval(function() {
+			if (web3.eth.accounts[0] !== account) {
+				account = web3.eth.accounts[0];
+				console.log(account);
+				//Get the address from Metamask and display it on screen in html.
+				document.getElementById("address").innerHTML = account;
+				//Get the Eth Balance of the address and display it in html.
+				web3.eth.getBalance(account, function (error, wei) {
+                    if (!error) {
+                        var balance = web3.fromWei(wei, 'ether');
+                        document.getElementById("output1").innerHTML = balance + " ETH";
+						console.log(balance)
+							}
+					});
+				//To display the balance of the tokens in the current address.
+				//contract address of the token.	
+				contractAddress = "0Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+				var tknAddress = (account).substring(2);
+				//Convert Token address in usable format.
+				var contractData = ('0x70a08231000000000000000000000000' + tknAddress);
+				web3.eth.call({
+					to: contractAddress,
+					data: contractData  
+				}, function(err, result) {
+					if (result) { 
+						console.log(result)
+						var a = new BigNumber(result);
+						console.log(a)
+						var b = web3.fromWei(a, 'ether');
+						var b1 = parseFloat(b).toFixed(3);
+						document.getElementById("output2").innerHTML = b1
+				
+							}
+						else {
+							console.log(err); // Dump errors here
+							}
+					});
+				//To transfer the tokens to account2
+				var tokenAbi = human_standard_token_abi
+				var tokenAddress = "0Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+				var token = web3.eth.contract(tokenAbi).at(tokenAddress);
+				document.getElementById("myBtn").addEventListener("click", function(){	
+					//10000000000000000000 = 10 tokens.
+					token.transfer(account2, 10000000000000000000, {from:account}, function(err, result) {
+						if (err) console.log(err)
+						else 
+							{
+							console.log("transaction hash")
+							console.log(result);
+							}
+						});
+				
+					});
+				
+			  }
+			}, 100);
+		
+		
+
+	});
+	//The details are displayed in the body of HTML
+
+ </script>
+
+</head>
+<body>
+	
+	Account is :
+	<br />
+	<div id="address"></div>
+	<br />
+    <br />
+	Ether Balance is :
+	<br />
+	<div id="output1"></div>
+	<br />
+    <br />
+	Magnus Token Balance is :
+	<br />
+	<div id="output2"></div>
+	<br />
+    <br />
+	
+
+  <button id="myBtn">Transfer token</button>
+
+	
+</body>
+</html>

@@ -1,0 +1,45 @@
+/*This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+ 
+/*This is developed by Magnus Collective. This program is written to
+use google vision api and display the result. 
+*/
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vision API</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  //Importing the google api key into the program.
+  <script type="text/javascript" src="key.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</head>
+<body>
+  <form id="fileform" action="">
+    <select name="type">
+	  <option value="LABEL_DETECTION">LABEL_DETECTION</option>
+      <option value="FACE_DETECTION">FACE_DETECTION</option>
+      <option value="TEXT_DETECTION">TEXT_DETECTION</option>
+      <option value="SAFE_SEARCH_DETECTION">SAFE_SEARCH_DETECTION</option>
+      <option value="IMAGE_PROPERTIES">IMAGE_PROPERTIES</option>
+    </select><br />
+    <input type="file" name="fileField"><br /><br />
+    <input type="submit" name="submit" value="Submit">
+  </form>
+
+  <code style="white-space:pre" id="results"></code>
+  
+</body>
+</html>

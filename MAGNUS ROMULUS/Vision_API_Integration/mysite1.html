@@ -1,0 +1,160 @@
+/*This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+ 
+ /*This is developed by Magnus Collective. This program is used to 
+ check the balance of Eth and ERC20 Tokens present in the current account
+ selected in MetaMask. 
+ */
+ 
+<html>
+<head>
+  <script type="text/javascript" src="./human_standard_token_abi.js"></script>
+  <script type="text/javascript" src="./bignumber1.js"></script>
+  <script type="text/javascript">
+  
+  //Declare variables required.
+  var account;
+  var version = web3.version.api;
+    //To check if the browser is connected to web3
+	if(web3.isConnected()) {
+				var con = "Connected";
+            }
+	else {
+		var con = "Not Connected";
+		}
+	//To find the current provider.
+	if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } 
+	
+	var account = web3.eth.accounts[0];
+   	//Event listener to monitor for changes in the current window.
+	window.addEventListener('load', function() {
+	document.getElementById("button11").disabled = true;
+	
+	account = web3.eth.accounts[0];
+            var accountInterval = setInterval(function() {
+              if (web3.eth.accounts[0] !== account) {
+                account = web3.eth.accounts[0];
+				//Get the address from Metamask and display it on screen in html.
+                document.getElementById("address").innerHTML = account;
+				//Get the Eth Balance of the address and display it in html.
+				web3.eth.getBalance(account, function (error, wei) {
+                    if (!error) {
+                        var balance = web3.fromWei(wei, 'ether');
+                        document.getElementById("output1").innerHTML = balance + " ETH";
+						console.log(balance)
+                    }
+                });
+				
+				//To display the balance of the tokens in the current address.
+				//contract address of the token.	
+				contractAddress = "0Xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+				var tknAddress = (account).substring(2);
+				//Convert Token address in usable format.
+				var contractData = ('0x70a08231000000000000000000000000' + tknAddress);
+				
+				web3.eth.call({
+				to: contractAddress,
+				data: contractData  
+				}, function(err, result) {
+				if (result) { 
+				console.log(result)
+				var a = new BigNumber(result);
+				console.log(a)
+				var b = web3.fromWei(a, 'ether');
+				var b1 =parseFloat(b).toFixed(3);
+				document.getElementById("output2").innerHTML = b1
+				var b2 = document.getElementById("output2");
+				//console.log(b2);
+				var a2 = new BigNumber(0);
+				console.log(a2);
+				var m = b.comparedTo(a2);
+				console.log(m)
+				if(m <= 0)
+				{
+				document.getElementById("button11").disabled = true;
+				}
+				else
+				{
+				document.getElementById("button11").disabled = false;
+				}
+				var tokens = (result); 
+				}
+				else {
+					console.log(err); // Dump errors here
+				}
+			});
+				
+								
+              }
+            }, 100);		
+			
+	});
+	//The details are displayed in the body of HTML
+		
+
+  </script>
+</head>
+
+<body>
+	<h1>
+      <script type="text/javascript">
+        document.write("Script to connect to Ethereum network")
+				
+      </script>
+    </h1>
+	
+	<h2>
+      Web 3 version is :
+      <script type="text/javascript">
+        
+		document.write(version)
+		
+      </script>
+    </h2>
+	
+	<h3>
+      Status is :
+      <script type="text/javascript">
+        
+		document.write(con)
+		
+      </script>
+    </h3>
+	<h4>
+	
+	Account is :
+	<br />
+	<div id="address"></div>
+	<br />
+    <br />
+	Ether Balance is :
+	<br />
+	<div id="output1"></div>
+	<br />
+    <br />
+	Magnus Token Balance is :
+	<br />
+	<div id="output2"></div>
+	<br />
+    <br />
+	
+	
+	<button id="button11" onclick="location.href='./index.html'" type="button">
+     Check out our vision API</button>
+	
+	
+</body>
+</html>

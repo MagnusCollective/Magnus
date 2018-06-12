@@ -76,4 +76,4 @@ Many Magnus Collective Actors will live on the cloud, houses or even as minute r
 ![roadmap](https://user-images.githubusercontent.com/33899852/34071000-2ddd8cd4-e295-11e7-8832-2069aba2cbbc.PNG)
 
 ### Contribute
-If you are interested in contributing to the development of this project, contact@0xmagnus.com
+If you are interested in contributing to the development of this project, magnus@0xmagnus.io

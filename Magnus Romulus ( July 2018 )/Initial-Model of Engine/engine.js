@@ -147,7 +147,7 @@ function eng(aaddress, atype) {
 ]);
 	
 	//contract address
-	var _test = _testContract.at('0x217CA0Ee71E2f3FC8d426AA8A2c8B4DBCaD83568');
+	var _test = _testContract.at('*************************************************');
 	
 	
 	

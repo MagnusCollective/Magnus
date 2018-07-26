@@ -1,4 +1,4 @@
-<!--The Below code is a Web UI used for actors to login to Magnus -->
+<!--<!--The Below code is a Web UI used for actors to login to Magnus -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +7,22 @@
  <meta http-equiv="X-UA-Compatible" content="ie=edge">
  <title>Document</title>
 <link rel="stylesheet" type="text/css" href="/MAGregintegration/css/login.css">
-<script src="./node_modules/web3/dist/web3.min.js"></script>
+<script src="./login/node_modules/web3/dist/web3.min.js"></script>
+<script src="./login/mmtest.js"></script>
 </head>
-<body>
+<body onload="send_address()">
  <div class="container">
 <h1>Enter Magnus</h1>
-<!--Takes the input value from Address and stores it in login_address-->
-<label for="name">Address</label>
-<input id="login_address" type="text">
-<!--The address is pushed into the function in login.js file.-->
-<button id="button1" onclick="_loginchk(login_address.value)"">Login</button>
+
+	<br />
+	Your Account Address is :
+	<br />
+	<br />
+	<div id = "mmaddress"></div>
+	<br />
+<!--Address is passed to the "_loginchk" function to check if the address is registered with Magnus-->
+<button id="button2" onclick="_loginchk(document.getElementById('mmaddress').innerHTML)">Login in using above Address</button>
+
 <h1>New Member</h1>
 <button id="button" onclick="location.href='./Registration/reg.html'">Register</button>
 </div>
@@ -24,6 +30,7 @@
 
 <!--calls the login script-->
  <script src="./login/login.js"></script>
+ 
  
 </body>
 </html>

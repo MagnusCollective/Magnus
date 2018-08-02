@@ -1,0 +1,30 @@
+
+
+<!--The Below code is a Web UI used to collect the data from the actors and sends it to the engine for processing-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <title>Document</title>
+<link rel="stylesheet" type="text/css" href="/MAGregintegration/css/reg.css">
+<script src="./node_modules/web3/dist/web3.min.js"></script>
+<script src="./abi.txt"></script>
+</head>
+<body>
+ <div class="container">
+<h1>Magnus Registration</h1>
+
+<label for="name">Actor Address</label>
+ <input id="actor_address" type="text">
+<label for="name">Actor Type</label>
+ <input id="actor_type" type="text">
+<button id="button" onclick="eng(actor_address.value,actor_type.value)">Register</button>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+ <script src="./engine.js"></script>
+ 
+</body>
+</html>

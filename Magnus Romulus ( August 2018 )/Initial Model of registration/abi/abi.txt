@@ -1,0 +1,2 @@
+
+let abi = paste your smart contract's abi here

@@ -1,0 +1,49 @@
+<!--The Below code is a Web UI which publishes the jobs available and jobs posted to the user, please note this page is still under development-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" href="/MAGregintegration/css/dashboard.css">
+
+</head>
+<body>
+<h1>Magnus Dashboard</h1>
+<div class="available_jobs_">
+<h2>Available jobs</h2>
+<select name="available_jobs" size="5" multiple> 
+<option value="item1">job1 
+<option value="item2">job2 
+<option value="item3">job3
+<option value="item1">job4 
+<option value="item2">job5 
+</select>
+</br>
+<button id="button1" onclick="">Check Job</button>
+<div id="right-bar">
+<button id="button3" onclick="location.href='/MAGregintegration/postnewjob/postnewjob.html'">Post New Job</button>
+</div>
+</div>
+<div class="posted_jobs_">
+<h3>Posted jobs</h3>
+<select name="posted_jobs" size="5" multiple> 
+<option value="item1">job1 
+<option value="item2">job2 
+<option value="item3">job3
+<option value="item1">job4 
+<option value="item2">job5 
+</select>
+</br>
+<button id="button2" onclick="">Edit posted Job</button>
+</br>
+</div>
+<div class="clearfix"></div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+ <script>
+ 
+ </script>
+ 
+</body>
+</html>
